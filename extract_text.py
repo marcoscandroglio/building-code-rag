@@ -11,7 +11,7 @@ def extract_text(pdf_dir: str) -> list:
     block_list = []
     for file in os.listdir(pdf_dir):
         file_path = os.path.join(pdf_dir, file)
-        print(file_path)
+        # print(file_path)
         document = fitz.open(file_path)
 
         for page_num in range(document.page_count):
