@@ -1,7 +1,7 @@
 import faiss
 import numpy as np
 
-def create_vector_index(embeddings, index_path='vector_index.faiss'):
+def create_vector_index(embeddings, index_path='data/vector_index.faiss'):
     embeddings_np = embeddings.cpu().detach().numpy()
     dimension = embeddings_np.shape[1]
     index = faiss.IndexFlatL2(dimension)
@@ -10,7 +10,7 @@ def create_vector_index(embeddings, index_path='vector_index.faiss'):
     return index
 
 
-def load_vector_index(index_path='vector_index.faiss'):
+def load_vector_index(index_path='data/vector_index.faiss'):
     return faiss.read_index(index_path)
 
 
