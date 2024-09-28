@@ -26,6 +26,30 @@ def extract_text(pdf_dir: str) -> list:
     return block_list
 
 
+def merge_blocks(text_blocks: list, min_block_len: int=5) -> list:
+
+    merged_blocks = []
+    curr_block = ''
+
+    for block in text_blocks:
+
+        if len(block.split()) < min_block_len:
+            curr_block += ' ' + block
+
+        elif len(block.split()) >= min_block_len and curr_block:
+            curr_block += ' ' + block
+            merged_blocks.append(curr_block.strip())
+            curr_block = ''
+
+        else:
+            merged_blocks.append(block)
+
+    if curr_block:
+        merged_blocks.append(curr_block.strip())
+
+    return merged_blocks
+
+
 if __name__ == '__main__':
     DIRECTORY = '2022BC/'
     pdf_blocks = extract_text(DIRECTORY)
