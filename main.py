@@ -13,10 +13,6 @@ def load_data(data_dir='data/'):
 
     return pdf_blocks
 
-blocks = load_data()
-print(len(blocks))
-print(type(blocks))
-
 if __name__ == '__main__':
     FAISS_DIRECTORY = 'data/vector_index.faiss'
 
@@ -25,13 +21,14 @@ if __name__ == '__main__':
     blocks = load_data()
 
     while True:
-        user_query = input('What is your code question? (type q to quit):\n')
+        user_query = input('Please enter your question about building codes or regulations (type \'q\' to quit):\n')
         if user_query == 'q':
             break
 
         top_k_results = search_vector_db(user_query, model, vector_index, blocks, )
 
-        print('\n')
+        print('\nRelevant Sections:')
+        print('------------------\n')
         for result in top_k_results:
             print(result)
             print('\n')
