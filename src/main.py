@@ -1,20 +1,35 @@
 import os
 import json
-import numpy as np
 from sentence_transformers import SentenceTransformer
-from vector_db import load_vector_index, search_vector_db
+from src.vector_db import load_vector_index, search_vector_db
 
-def load_data(data_dir='data/'):
+def load_data(data_dir: str='saved_data/') -> list:
+    """
+    Loads text block data from a JSON file in the specified directory.
+
+    This function searches for a JSON file in the provided directory, reads it, and 
+    loads its contents as a list of text blocks. It assumes that there is only one 
+    JSON file in the specified directory.
+
+    Args:
+        data_dir (str, optional): The directory where the JSON file is stored. 
+                                  Defaults to 'saved_data/'.
+
+    Returns:
+        list: A list of text blocks loaded from the JSON file.
+    """
+
     json_file_name = [name for name in os.listdir(data_dir) if '.json' in name]
     json_file_path = os.path.join(data_dir, json_file_name[0])
 
-    with open(json_file_path, 'r') as file:
+    with open(json_file_path, 'r', encoding='utf-8') as file:
         pdf_blocks = json.load(file)
 
     return pdf_blocks
 
+
 if __name__ == '__main__':
-    FAISS_DIRECTORY = 'data/vector_index.faiss'
+    FAISS_DIRECTORY = 'saved_data/vector_index.faiss'
 
     model = SentenceTransformer('all-MiniLM-L6-v2')
     vector_index = load_vector_index(FAISS_DIRECTORY)

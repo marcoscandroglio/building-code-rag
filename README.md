@@ -1,6 +1,6 @@
 # Building Code RAG
 
-# PDF Data Processing for RAG (Retrieval-Augmented Generation)
+## PDF Data Processing for RAG (Retrieval-Augmented Generation)
 
 This project extracts and processes text from a collection of PDFs to build a foundation for a **Retrieval-Augmented Generation (RAG)** model. The goal is to efficiently extract text, chunk it logically, generate embeddings, and store them in a vector database for fast retrieval and integration with a language model.
 
@@ -20,8 +20,17 @@ A **Command Line Interface (CLI)** allows users to ask questions about the conte
 
 ## Usage Instructions
 
-1. **Preprocess the PDFs and Create the Vector Database**: Extract text blocks, generate embeddings, and create a vector index from your PDF collection. The preprocessed data and vector index are saved for efficient querying.
-2. **Run the CLI**: Use the command line interface to ask questions about the content of the PDFs. The CLI retrieves and displays relevant sections based on the similarity of the query to the stored embeddings.
+1. **Collect PDFs to Process**: Run the webscraping script provided to retrieve the building code text by running:
+
+      `python -m src.get_pdfs`
+
+2. **Preprocess the PDFs and Create the Vector Database**: Extract text blocks, generate embeddings, and create a vector index from your PDF collection. The preprocessed data and vector index are saved for efficient querying.
+
+      `python -m src.preprocess_data`
+
+3. **Run the CLI**: Use the command line interface to ask questions about the content of the PDFs. The CLI retrieves and displays relevant sections based on the similarity of the query to the stored embeddings.
+
+      `python -m src.main`
 
 ## Example Queries
 
@@ -83,3 +92,6 @@ stair assembly, or other enclosure shall be counted as one exit stairway.
    ```bash
    git clone https://github.com/marcoscandroglio/building-code-rag.git
    cd building-code-rag
+   python -m src.get_pdfs
+   python -m src.preprocess_data
+   python -m src.main

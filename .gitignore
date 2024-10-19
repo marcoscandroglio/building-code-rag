@@ -1,4 +1,3 @@
-2022BC/
-data/
+saved_data/
 __pycache__/
 *.faiss

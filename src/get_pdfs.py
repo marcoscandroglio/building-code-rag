@@ -2,6 +2,7 @@ import os
 import requests
 from bs4 import BeautifulSoup
 
+DATA_DIRECTORY = 'saved_data/2022BC'
 url = 'https://www.nyc.gov/site/buildings/codes/2022-construction-codes.page#bldgs'
 base_url = 'https://www.nyc.gov/assets/buildings/codes-pdf/cons_codes_2022/'
 response = requests.get(url, timeout=10)
@@ -20,17 +21,15 @@ for link in links:
         if '=' in name:
             name = name.split('=')[1].split('&')[0]
         file_names.append(name)
-        # print(name)
-        # print(link)
 
-os.makedirs('2022BC', exist_ok=True)
+os.makedirs(DATA_DIRECTORY, exist_ok=True)
 
 for idx, file_name in enumerate(file_names):
 
     file_url = base_url + file_name
     response = requests.get(file_url, timeout=10)
 
-    file_path = os.path.join('2022BC', f'{idx}_{file_name}')
+    file_path = os.path.join(DATA_DIRECTORY, f'{idx}_{file_name}')
 
     with open(file_path, 'wb') as file:
         file.write(response.content)
